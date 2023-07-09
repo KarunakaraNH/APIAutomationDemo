@@ -7,14 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataBuild {
-    public AddPlace addPlacePayLoad(){
+
+    public AddPlace addPlacePayLoad(String name,String language,String address){
         AddPlace p=new AddPlace();
         p.setAccuracy(50);
-        p.setAddress("jala, KB Circle,KA");
-        p.setLanguage("Kannada");
+        p.setAddress(address);
+        p.setLanguage(language);
         p.setPhoneNumber("9916730290");
         p.setWebsite("https://www.p.com");
-        p.setName("Karuna");
+        p.setName(name);
         List<String> mylist=new ArrayList<String>();
         mylist.add("shoe park");
         mylist.add("shop");
@@ -24,5 +25,11 @@ public class TestDataBuild {
         loc.setLng(19922);
         p.setLocation(loc);
         return p;
+    }
+
+    public String deletePlacePayLoad(String placeid){
+       // return "{\n" + "    \"place_id\":\"46bb359522189805c244f9b5ecda8768\"\n" + "}";
+        return "{\n" + "    \"place_id\":\"" + placeid + "\"\n" + "}";
+
     }
 }

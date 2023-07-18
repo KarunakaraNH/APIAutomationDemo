@@ -6,7 +6,9 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/main/java/Featurefiles",glue ={"stepDefinition"})
+@CucumberOptions(features = "src/main/java/Featurefiles/AddPlace.feature",
+        glue ={"stepDefinition"},
+        plugin = {"pretty", "html:target/cucumber-reports"})
 public class TestRunner {
 
 

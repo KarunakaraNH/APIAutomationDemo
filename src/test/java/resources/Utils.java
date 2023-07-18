@@ -7,32 +7,55 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.parsing.Parser;
+//import io.restassured.parsing.Parser;
 
 import java.io.*;
 import java.util.Properties;
 
 public class Utils {
-   public RequestSpecification req;
+
+   public static RequestSpecification req;
 
     public RequestSpecification requestSpecification() throws IOException {
 
         if(req==null)
         {
             PrintStream log =new PrintStream(new FileOutputStream("logging.txt"));
-            req=new RequestSpecBuilder().setBaseUri(getGlobalValue("baseUrl")).addQueryParam("key", "qaclick123")
+            req=new RequestSpecBuilder()
+                    .setBaseUri(getGlobalValue("baseUrl"))
+                    .addQueryParam("key", "qaclick123")
                     .addFilter(RequestLoggingFilter.logRequestTo(log))
                     .addFilter(ResponseLoggingFilter.logResponseTo(log))
-                    .setContentType(ContentType.JSON).build();
+                    .setContentType(ContentType.JSON)
+                  .build();
             return req;
         }
         return req;
 
     }
 
+    public RequestSpecification createUserRequestSpecification() throws IOException {
+
+        if(req==null)
+        {
+            PrintStream log =new PrintStream(new FileOutputStream("logging.txt"));
+            req=new RequestSpecBuilder().setBaseUri(getGlobalValue("baseUrl"))
+                    .addFilter(RequestLoggingFilter.logRequestTo(log))
+                    .addFilter(ResponseLoggingFilter.logResponseTo(log))
+                    .setContentType(ContentType.JSON)
+                    .build();
+            return req;
+        }
+        return req;
+
+    }
+
+
     public static String getGlobalValue(String key) throws IOException {
 
         Properties prop=new Properties();
-        FileInputStream fis=new FileInputStream("/Users/karunakaranh/API  Testing docs/APIFrameworkDemo/src/test/java/resources/global.properties");
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/java/resources/global.properties");
         prop.load(fis);
         return prop.getProperty(key);
 
@@ -41,8 +64,10 @@ public class Utils {
     public String getJsonPath(Response response, String key)
     {
      String resp= response.toString();
-        JsonPath js=new JsonPath(resp);
-       return js.get(key).toString();
+     JsonPath js=new JsonPath(resp);
+     return js.
+             get(key).toString();
+
     }
 
 }

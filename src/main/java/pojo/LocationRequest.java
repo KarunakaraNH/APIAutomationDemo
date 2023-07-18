@@ -1,6 +1,6 @@
 package pojo;
 
-public class Location {
+public class LocationRequest {
 
     private double lat;
 

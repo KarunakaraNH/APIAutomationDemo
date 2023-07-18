@@ -1,7 +1,7 @@
 package resources;
 
 import pojo.AddPlace;
-import pojo.Location;
+import pojo.LocationRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class TestDataBuild {
         mylist.add("shoe park");
         mylist.add("shop");
         p.setTypes(mylist);
-        Location loc=new Location();
+        LocationRequest loc=new LocationRequest();
         loc.setLat(33.222);
         loc.setLng(19922);
         p.setLocation(loc);
@@ -32,4 +32,12 @@ public class TestDataBuild {
         return "{\n" + "    \"place_id\":\"" + placeid + "\"\n" + "}";
 
     }
+
+    public String createUserPayload(String name, String job) {
+        return "{\n" +
+                "    \"name\": \"" + name + "\",\n" +
+                "    \"job\": \"" + job + "\"\n" +
+                "}";
+    }
+
 }

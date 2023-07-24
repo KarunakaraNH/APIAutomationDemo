@@ -35,6 +35,7 @@ public class AddPlaceStepDefinition extends Utils{
     public static AddPlaceResponse addPlaceResponse;
     public static String place_id;
     public GetPlace getplace;
+    APIResource resourceAPI;
 
 
     @Given("addplace payload with {string} {string} {string}")
@@ -44,7 +45,7 @@ public class AddPlaceStepDefinition extends Utils{
     }
     @When("user calls {string} with {string} http request")
     public void user_calls_with_http_request(String resource, String method) {
-        APIResource resourceAPI = APIResource.valueOf(resource);
+        resourceAPI = APIResource.valueOf(resource);
         System.out.println(resourceAPI.getAPIResource());
         resonsepspec = new ResponseSpecBuilder().expectStatusCode(200).expectContentType(ContentType.JSON).build();
         System.out.println("check point");
@@ -75,15 +76,13 @@ public class AddPlaceStepDefinition extends Utils{
 
     }
 
-
-
   @Then("verify place_Id created maps to {string} using {string}")
     public void verify_place_id_created_maps_to_using(String expectedName, String resource) throws IOException {
-         place_id= addPlaceResponse.getPlaceId();
+         place_id= addPlaceResponse.getPlace_id();
          System.out.println("place_id "+place_id);
          reqspec=given().spec(requestSpecification()).when().queryParam("place_id",place_id);
          user_calls_with_http_request(resource,"GET");
-      // ignoring unknown properties
+         // ignoring unknown properties
          objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
          GetPlace getplace= objectMapper.readValue(jsonResponse,GetPlace.class);
          String actualName=getplace.getName();

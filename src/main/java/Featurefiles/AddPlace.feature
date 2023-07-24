@@ -11,10 +11,10 @@ Feature: Add and delete Place functionality
     Examples:
     |name        |language      | address|
     |Abhilash    |English       |Bangalore|
-    | Rahul   |France       |Bangalore|
+    | Rahul   |France       |france|
 
 
-  # Scenario: Validate delete place
+  #Scenario: Validate delete place
     #Given Delete place payload
       # When user calls "deletePlaceAPI" with post http request
      ##When user calls "addPlaceAPI" with "post" http request

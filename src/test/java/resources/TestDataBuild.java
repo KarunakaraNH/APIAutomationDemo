@@ -28,7 +28,6 @@ public class TestDataBuild {
     }
 
     public String deletePlacePayLoad(String placeid){
-       // return "{\n" + "    \"place_id\":\"46bb359522189805c244f9b5ecda8768\"\n" + "}";
         return "{\n" + "    \"place_id\":\"" + placeid + "\"\n" + "}";
 
     }
